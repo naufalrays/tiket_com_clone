@@ -129,7 +129,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
               //   'Cari di ',
               //   style: TextStyle(color: Colors.black54),
               // ),
-              hintText: "Event di Jakarta",
+              hintText: "Event di Depok",
             ),
           ),
         ),
