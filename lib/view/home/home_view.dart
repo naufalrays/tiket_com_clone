@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tiket_com_clone/view/home/components/category_icon.dart';
+import 'package:tiket_com_clone/view/home/category_components/category_icon.dart';
+import 'package:tiket_com_clone/view/home/discount_components/discount_container.dart';
+import 'package:tiket_com_clone/view/home/promo_components/promo_container.dart';
+import 'package:tiket_com_clone/view/home/todo_components/todo_container.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -7,24 +10,77 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xff0064d3),
         body: CustomScrollView(
           slivers: [
-            // const SliverAppBar(
-            //   expandedHeight: 10,
-            //   backgroundColor: Colors.blue,
-            // ),
             const SliverPersistentHeader(
               delegate: CustomSliverAppBarDelegate(expandedHeight: 120),
               pinned: true,
             ),
-            buildBody(),
-            const SliverPadding(
-              padding: EdgeInsets.symmetric(
-                vertical: 30,
+            SliverToBoxAdapter(
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      buildBody(),
+                      const CategoryIcon(),
+                    ],
+                  ),
+                  Positioned(
+                    top: 120,
+                    left: 20,
+                    right: 20,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      elevation: 2,
+                      child: SizedBox(
+                        height: 50,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 12),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    height: 11,
+                                    width: 11,
+                                    child: Image.asset(
+                                        "assets/images/ticket_coin_logo.png"),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  const Text(
+                                    'tiket Points',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const Text(
+                                'Daftar dan lengkapi profilmu untuk dapetin 7.000 poin!',
+                                style: TextStyle(
+                                  color: Color(0xff0064d3),
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              sliver: CategoryIcon(),
             ),
+            const DiscountContainer(),
+            const PromoContainer(),
+            const TodoContainer(),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -41,12 +97,11 @@ class HomeView extends StatelessWidget {
   }
 
   Widget buildBody() {
-    return SliverToBoxAdapter(
-      child: Image.network(
-        "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/discovery-mobile/promo/2022/08/09/97942eed-c387-4d8d-be27-0c3328052c06-1660029573583-51e29624efb9d317933fe2d556bd4318.png",
-        height: 170,
-        fit: BoxFit.cover,
-      ),
+    return Image.network(
+      "https://blog.tiket.com/wp-content/uploads/Featured_Image_IN-900x570.jpg",
+      height: 150,
+      width: double.maxFinite,
+      fit: BoxFit.cover,
     );
   }
 }
@@ -61,22 +116,27 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    // final top = expandedHeight - shrinkOffset - size / 2;
-
+    const size = 60;
+    final top = expandedHeight - shrinkOffset - size / 2;
+    print(overlapsContent);
     // print(expandedHeight);
     // print(shrinkOffset);
-    final size = MediaQuery.of(context);
+    final sizeQuery = MediaQuery.of(context);
 
     return Stack(
-      // clipBehavior: Clip.none,
-      fit: StackFit.expand,
       children: [
-        buildAppBar(shrinkOffset),
-        Positioned(
-          top: size.padding.top,
-          left: 20,
-          right: 20,
-          child: searchBar(shrinkOffset),
+        Stack(
+          // clipBehavior: Clip.none,
+          fit: StackFit.expand,
+          children: [
+            buildAppBar(shrinkOffset),
+            Positioned(
+              top: sizeQuery.padding.top,
+              left: 20,
+              right: 20,
+              child: searchBar(shrinkOffset),
+            ),
+          ],
         ),
       ],
     );
@@ -103,7 +163,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   Widget searchBar(double shrinkOffset) {
-    print((290 + (shrinkOffset * 0.5)));
+    print(shrinkOffset);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -115,7 +175,10 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
           child: TextFormField(
             // autocorrect: false,
             decoration: InputDecoration(
+              filled: true,
               isDense: true,
+              fillColor: Colors.grey[100],
+              // focusColor: Colors.white,
               // fillColor: Colors.white,
               contentPadding: EdgeInsets.zero,
               border: OutlineInputBorder(
@@ -125,23 +188,39 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                 Icons.search,
                 color: Colors.black54,
               ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                borderSide: const BorderSide(
+                  color: Colors.transparent,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                borderSide: const BorderSide(
+                  color: Colors.transparent,
+                  width: 2.0,
+                ),
+              ),
               // label: const Text(
               //   'Cari di ',
               //   style: TextStyle(color: Colors.black54),
               // ),
-              hintText: "Event di Depok",
+              hintText: "Event di Jakarta",
             ),
           ),
         ),
         SizedBox(
+          height: 40,
           width: (93 - (shrinkOffset * 0.5)) <= 38
               ? 38
               : (93 - (shrinkOffset * 0.5)),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 12),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(32),
               ),
             ),
             onPressed: () {},
@@ -150,6 +229,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                 const Icon(
                   Icons.discount,
                   size: 14,
+                  color: Colors.black87,
                 ),
                 Visibility(
                   visible: shrinkOffset <= 93,
@@ -161,6 +241,9 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                   child: Text(
                     'Promo',
                     maxLines: 1,
+                    style: TextStyle(
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
               ],
