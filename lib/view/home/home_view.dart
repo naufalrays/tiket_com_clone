@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tiket_com_clone/view/home/car_rent_components/car_rent_container.dart';
 import 'package:tiket_com_clone/view/home/category_components/category_icon.dart';
 import 'package:tiket_com_clone/view/home/discount_components/discount_container.dart';
+import 'package:tiket_com_clone/view/home/flight_promo_components/flight_promo_container.dart';
 import 'package:tiket_com_clone/view/home/promo_components/promo_container.dart';
 import 'package:tiket_com_clone/view/home/todo_components/todo_container.dart';
 
@@ -9,91 +11,94 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: const Color(0xff0064d3),
-        body: CustomScrollView(
-          slivers: [
-            const SliverPersistentHeader(
-              delegate: CustomSliverAppBarDelegate(expandedHeight: 120),
-              pinned: true,
-            ),
-            SliverToBoxAdapter(
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      buildBody(),
-                      const CategoryIcon(),
-                    ],
-                  ),
-                  Positioned(
-                    top: 120,
-                    left: 20,
-                    right: 20,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      elevation: 2,
-                      child: SizedBox(
-                        height: 50,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 12),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    height: 11,
-                                    width: 11,
-                                    child: Image.asset(
-                                        "assets/images/ticket_coin_logo.png"),
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  const Text(
-                                    'tiket Points',
-                                    style: TextStyle(
-                                      fontSize: 10,
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Container(
+            color: const Color(0xff0064d3),
+            height: size.height / 2,
+            width: double.maxFinite,
+          ),
+          CustomScrollView(
+            physics: const ClampingScrollPhysics(),
+            slivers: [
+              const SliverPersistentHeader(
+                delegate: CustomSliverAppBarDelegate(expandedHeight: 120),
+                pinned: true,
+              ),
+              SliverToBoxAdapter(
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        buildBody(),
+                        const CategoryIcon(),
+                      ],
+                    ),
+                    Positioned(
+                      top: 120,
+                      left: 20,
+                      right: 20,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        elevation: 2,
+                        child: SizedBox(
+                          height: 50,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 12),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 11,
+                                      width: 11,
+                                      child: Image.asset(
+                                          "assets/images/ticket_coin_logo.png"),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              const Text(
-                                'Daftar dan lengkapi profilmu untuk dapetin 7.000 poin!',
-                                style: TextStyle(
-                                  color: Color(0xff0064d3),
-                                  fontSize: 10,
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    const Text(
+                                      'tiket Points',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                                const Text(
+                                  'Daftar dan lengkapi profilmu untuk dapetin 7.000 poin!',
+                                  style: TextStyle(
+                                    color: Color(0xff0064d3),
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            const DiscountContainer(),
-            const PromoContainer(),
-            const TodoContainer(),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Container(
-                  height: 1000,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                  ),
+                  ],
                 ),
               ),
-            )
-          ],
-        ));
+              const DiscountContainer(),
+              const PromoContainer(),
+              const TodoContainer(),
+              const FlightPromoContainer(),
+              const CarRentContainer(),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Widget buildBody() {

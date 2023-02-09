@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiket_com_clone/models/flight_card_models.dart';
 import 'package:tiket_com_clone/models/todo_card_models.dart';
 
 class HomeViewModels extends ChangeNotifier {
@@ -228,6 +229,109 @@ class HomeViewModels extends ChangeNotifier {
       review: "8169",
       normalPrice: "189.500",
       discountPrice: "183.815",
+    ),
+  ];
+
+  List<TodoFlightModels> domesticDealsData = [
+    TodoFlightModels(
+      image: "assets/images/destination_bali.jpeg",
+      starting: "Jakarta",
+      destination: "Denpasar Bali",
+      departureDate: "11 Feb 2023",
+      plane: "Lion Air",
+      planeImages: "assets/images/lion_air_airlines.png",
+      planeClass: "Ekonomi",
+      discountPrice: "675.910",
+    ),
+    TodoFlightModels(
+      image: "assets/images/destination_surabaya.jpeg",
+      starting: "Jakarta",
+      destination: "Surabaya",
+      departureDate: "8 Feb 2023",
+      plane: "Citilink",
+      planeImages: "assets/images/citilink_airlines.png",
+      planeClass: "Ekonomi",
+      discountPrice: "667.001",
+    ),
+    TodoFlightModels(
+      image: "assets/images/destination_makassar.jpeg",
+      starting: "Jakarta",
+      destination: "Makassar",
+      departureDate: "11 Feb 2023",
+      plane: "Sriwijaya Air",
+      planeImages: "assets/images/sriwijaya_airlines.png",
+      planeClass: "Ekonomi",
+      discountPrice: "922.720",
+    ),
+  ];
+  List<TodoFlightModels> intlDealsData = [
+    TodoFlightModels(
+      image: "assets/images/destination_tokyo.jpeg",
+      starting: "Jakarta",
+      destination: "Tokyo",
+      departureDate: "22 Mei 2023",
+      arrivalDate: "30 Mei 2023",
+      plane: "Philippine Airlines",
+      planeImages: "assets/images/philippine_airlines.png",
+      planeClass: "Ekonomi",
+      discountPrice: "5.996.800",
+    ),
+    TodoFlightModels(
+      image: "assets/images/destination_osaka.jpeg",
+      starting: "Jakarta",
+      destination: "Osaka",
+      departureDate: "14 Mei 2023",
+      arrivalDate: "22 Mei 2023",
+      plane: "Singapore Airlines",
+      planeImages: "assets/images/singapore_airlines.png",
+      planeClass: "Ekonomi",
+      discountPrice: "10.425.512",
+    ),
+    TodoFlightModels(
+      image: "assets/images/destination_singapore.jpg",
+      starting: "Jakarta",
+      destination: "Singapore",
+      departureDate: "1 Maret 2023",
+      arrivalDate: "12 Maret 2023",
+      plane: "AirAsia Indonesia",
+      planeImages: "assets/images/air_asia_airlines.png",
+      planeClass: "Ekonomi",
+      discountPrice: "2.013.865",
+    ),
+  ];
+  List<TodoFlightModels> intlPremiumDealsData = [
+    TodoFlightModels(
+      image: "assets/images/destination_tokyo.jpeg",
+      starting: "Jakarta",
+      destination: "Tokyo",
+      departureDate: "14 Mei 2023",
+      arrivalDate: "22 Mei 2023",
+      plane: "Philippine Airlines",
+      planeImages: "assets/images/philippine_airlines.png",
+      planeClass: "Bisnis",
+      discountPrice: "15.660.900",
+    ),
+    TodoFlightModels(
+      image: "assets/images/destination_osaka.jpeg",
+      starting: "Jakarta",
+      destination: "Osaka",
+      departureDate: "29 April 2023",
+      arrivalDate: "10 Mei 2023",
+      plane: "Singapore Airlines",
+      planeImages: "assets/images/singapore_airlines.png",
+      planeClass: "Bisnis",
+      discountPrice: "32.445.824",
+    ),
+    TodoFlightModels(
+      image: "assets/images/destination_singapore.jpg",
+      starting: "Jakarta",
+      destination: "Singapore",
+      departureDate: "1 Maret 2023",
+      arrivalDate: "20 Maret 2023",
+      plane: "AirAsia Indonesia",
+      planeImages: "assets/images/air_asia_airlines.png",
+      planeClass: "Bisnis",
+      discountPrice: "8.932.990",
     ),
   ];
 }

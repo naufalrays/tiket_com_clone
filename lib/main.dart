@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tiket_com_clone/view/home/home_view.dart';
+import 'package:tiket_com_clone/view/main_view.dart';
 import 'package:tiket_com_clone/view_models.dart/home_view_models.dart';
+import 'package:tiket_com_clone/view_models.dart/main_view_model.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => HomeViewModels(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => HomeViewModels(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MainViewModel(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
@@ -24,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeView(),
+      home: const MainView(),
     );
   }
 }
